@@ -1,0 +1,6 @@
+if SHIELD_AHOKORE
+
+config ZMK_KEYBOARD_NAME
+    default "ahokore"
+
+endif # SHIELD_AHOKORE
