@@ -70,7 +70,7 @@
 #define WIN_RGT &kp LG(RBKT) 
 // Shrink/grow column
 #define COL_DEC &kp LG(MINUS)
-#define COL_INC &kp LG(PLUS)
+#define COL_INC &kp LG(EQUALS)
 // Shrink/grow column
 #define ROW_DEC &kp LG(LS(MINUS))
 #define ROW_INC &kp LG(LS(PLUS))
