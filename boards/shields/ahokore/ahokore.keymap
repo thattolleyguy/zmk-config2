@@ -13,6 +13,7 @@
 #define NUM 2
 #define NAV 3
 #define FN 4
+#define L_BT 5
 
 #define KPPLS KP_PLUS
 #define KPMNS KP_MINUS
@@ -51,15 +52,29 @@
 #define NAV_BSP &lt_qt NAV BSPC
 #define NUM_TAB &lt NUM TAB
 #define DEL_FN &lt_qt FN DEL
+#define WSPC_RET &lt_qt WSPC RET 
 #define O_USB &out OUT_USB
 #define O_BLE &out OUT_BLE
 
 #define CB_PRV &kp LC(F11) // Clipboard previous
 #define CB_NXT &kp LC(F12) // Clipboard next
+// Shift to previous (up) workspace
 #define WS_PRV &kp LG(PG_UP) // Previous workspace
+// Shift to next (down) workspace
 #define WS_NXT &kp LG(PG_DN) // Previous workspace
-#define WS_W_PRV &kp LG(PG_UP) // Previous workspace
-#define WS_W_NXT &kp LS(LG(PG_DN)) // Previous workspace
+// Move window to previous workspace
+#define WS_W_PRV &kp LC(LG(PG_UP)) // Previous workspace
+// Move window to next workspace
+#define WS_W_NXT &kp LC(LG(PG_DN)) // Previous workspace
+// Move window to column left or right
+#define WIN_LFT &kp LG(LBKT) 
+#define WIN_RGT &kp LG(RBKT) 
+// Shrink/grow column
+#define COL_DEC &kp LG(MINUS)
+#define COL_INC &kp LG(PLUS)
+// Shrink/grow column
+#define ROW_DEC &kp LG(LS(MINUS))
+#define ROW_INC &kp LG(LS(PLUS))
 
 / {
 
@@ -111,23 +126,6 @@
             >;
         };
 
-   
-//         game_layer {
-//             bindings = <
-
-// //┌─────────┬─────────┬─────────┬─────────┬─────────┐    ┌─────────┬─────────┬─────────┬─────────┬─────────┐
-//      &kp Q     &kp W     &kp E     &kp R     &kp T          &kp Y     &kp U     &kp I     &kp O     &kp P    
-// //├─────────┼─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┼─────────┤
-//      &kp A     &kp S     &kp D     &kp F     &kp G          &kp H     &kp J     &kp K     &kp L    CTL_CLN
-// //├─────────┼─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┼─────────┤
-//      Z_SHFT    &kp X     &kp C     &kp V     &kp B          &kp N     &kp M   &kp COMMA  ALT_DOT   FS_SHFT 
-// //└─────────┴─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┴─────────┘
-//                         &kp ESC  &kp TAB   &kp SPACE       SYM_RET   NAV_BSP   DEL_FN
-// //                    └─────────┴─────────┴─────────┘    └─────────┴─────────┴─────────┘
-//             >;
-
-//         };     
-
          sym_layer {
             bindings = <
 //┌─────────┬─────────┬─────────┬─────────┬─────────┐    ┌─────────┬─────────┬─────────┬─────────┬─────────┐
@@ -137,7 +135,7 @@
 //├─────────┼─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┼─────────┤
    &kp LSHFT &none     &none     &none     &none          &kp PLUS  &kp UNDER &kp MINUS &kp EQUAL &kp RSHFT
 //└─────────┴─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┴─────────┘
-                       &none     &none     &none          &trans    &none     &none
+                       &none     &none     &mo L_BT       &trans    &none     &none
 //                    └─────────┴─────────┴─────────┘    └─────────┴─────────┴─────────┘
             >;
         };
@@ -145,11 +143,11 @@
          num_layer {
             bindings = <
 //┌─────────┬─────────┬─────────┬─────────┬─────────┐    ┌─────────┬─────────┬─────────┬─────────┬─────────┐
-   &kp VOLP  &kp PREV  &kp PLYP  &kp NEXT  &kp NMLCK      WS_PRV    WS_W_PRV  &none     &none     &none      
+   &kp VOLP  &kp PREV  &kp PLYP  &kp NEXT  &kp NMLCK      WS_W_PRV  WS_PRV    ROW_DEC   &none     &none      
 //├─────────┼─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┼─────────┤
-   &kp VOLM  &kp MUTE  &kp STOP  &none     &none          WS_NXT    WS_W_NXT  &none     &none     &none  
+   &kp VOLM  &kp MUTE  &kp STOP  &none     &none          WIN_LFT   WIN_RGT   COL_DEC   COL_INC   &none  
 //├─────────┼─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┼─────────┤
-   &kp LSHFT &none     &none     &none     &none          &none     &none     &none     &none     &none
+   &kp LSHFT &none     &none     &none     &none          WS_W_NXT  WS_NXT    ROW_INC   &none     &none
 //└─────────┴─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┴─────────┘
                        &none     &trans    &none          &none     &none     &none
 //                    └─────────┴─────────┴─────────┘    └─────────┴─────────┴─────────┘
@@ -178,12 +176,28 @@
 //├─────────┼─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┼─────────┤
    &kp F1    &kp F2    &kp F3    &kp F4    &kp F5         &kp F6    &kp F7    &kp F8    &kp F9    &kp F10  
 //├─────────┼─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┼─────────┤
-   &kp CAPS  &bt BT_CA &bt BT_C  O_BLE     O_USB          &bt BT_0  &bt BT_1  &bt BT_2  &bt BT_3  &none
+   &kp CAPS  &none     &none     &none     &none          &none     &none     &none     &none     &none
 //└─────────┴─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┴─────────┘
                        &trans    &trans    &trans         &none     &none     &trans
 //                    └─────────┴─────────┴─────────┘    └─────────┴─────────┴─────────┘
             >;
         };
+
+      bt_layer {
+            bindings = <
+//┌─────────┬─────────┬─────────┬─────────┬─────────┐    ┌─────────┬─────────┬─────────┬─────────┬─────────┐
+   &none     &none     &none     &none     &none          &bt BT_C  &bt BT_CA O_BLE     O_USB     &none     
+//├─────────┼─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┼─────────┤
+   &none     &none     &none     &none     &none          &bt BT_0  &bt BT_1  &bt BT_2  &bt BT_3  &none     
+//├─────────┼─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┼─────────┤
+   &none     &none     &none     &none     &none          &none     &none     &none     &none     &none
+//└─────────┴─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┴─────────┘
+                       &none     &none     &trans         &trans    &none     &none 
+//                    └─────────┴─────────┴─────────┘    └─────────┴─────────┴─────────┘
+            >;
+        };
+
+
 
     };
 };
