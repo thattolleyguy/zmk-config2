@@ -1,0 +1,189 @@
+// This file was generated from a template. Edit it to match your keyboard.
+// See https://zmk.dev/docs/development/hardware-integration/new-shield for more instructions.
+
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/outputs.h>
+
+#define DFLT 0
+// #define GAME 1
+#define SYM 1
+#define NUM 2
+#define NAV 3
+#define FN 4
+
+#define KPPLS KP_PLUS
+#define KPMNS KP_MINUS
+#define KPEQL KP_EQUAL
+#define KPMLT KP_MULTIPLY
+#define KPDIV KP_DIVIDE
+#define KPDOT KP_DOT
+
+#define BT_C BT_CLR
+#define BT_CA BT_CLR_ALL
+#define BT_0 BT_SEL 0
+#define BT_1 BT_SEL 1
+#define BT_2 BT_SEL 2
+#define BT_3 BT_SEL 3
+#define BT_4 BT_SEL 4
+
+#define VOLP C_VOL_UP
+#define VOLM C_VOL_DN
+#define MUTE C_MUTE
+#define PREV C_PREV
+#define PLYP C_PLAY_PAUSE
+#define NEXT C_NEXT
+#define STOP C_STOP
+#define PSBK PAUSE_BREAK
+#define NMLCK KP_NUM
+
+#define Z_SHFT &ht_bl LSHIFT Z
+#define FS_SHFT &ht_bl RSHIFT FSLH 
+#define ALT_DOT &ht_tp RALT DOT
+#define CTL_CLN &ht_tp RCTL SEMI 
+#define CTL_A &ht_tp LCTL A
+
+
+#define SYM_SPC &lt_qt SYM SPACE
+#define SYM_RET &lt_qt SYM RET
+#define NAV_BSP &lt_qt NAV BSPC
+#define NUM_TAB &lt NUM TAB
+#define DEL_FN &lt_qt FN DEL
+#define O_USB &out OUT_USB
+#define O_BLE &out OUT_BLE
+
+#define CB_PRV &kp LC(F11) // Clipboard previous
+#define CB_NXT &kp LC(F12) // Clipboard next
+#define WS_PRV &kp LG(PG_UP) // Previous workspace
+#define WS_NXT &kp LG(PG_DN) // Previous workspace
+#define WS_W_PRV &kp LG(PG_UP) // Previous workspace
+#define WS_W_NXT &kp LS(LG(PG_DN)) // Previous workspace
+
+/ {
+
+   behaviors {
+        ht_tp: homerow_mods {
+            compatible = "zmk,behavior-hold-tap";
+            #label = "homerow mods";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            flavor = "tap-preferred";
+            bindings = <&kp>, <&kp>;
+        };
+
+        ht_bl: holdtap_balanced {
+            compatible = "zmk,behavior-hold-tap";
+            #label = "hold-tap balanced";
+            #binding-cells = <2>;
+            tapping-term-ms = <150>;
+            flavor = "balanced";
+            bindings = <&kp>, <&kp>;
+        };
+
+        lt_qt: layertap_quicktap {
+            compatible = "zmk,behavior-hold-tap";
+            #label = "layer-tap quicktap";
+            #binding-cells = <2>;
+            tapping-term-ms = <150>;
+            flavor = "balanced";
+            bindings = <&mo>, <&kp>;
+            quick-tap-ms=<200>;
+        };
+
+    };
+
+  keymap {
+        compatible = "zmk,keymap";
+
+        default_layer {
+            bindings = <
+//┌─────────┬─────────┬─────────┬─────────┬─────────┐    ┌─────────┬─────────┬─────────┬─────────┬─────────┐
+     &kp Q     &kp W     &kp E     &kp R     &kp T          &kp Y     &kp U     &kp I     &kp O     &kp P    
+//├─────────┼─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┼─────────┤
+     CTL_A     &kp S     &kp D     &kp F     &kp G          &kp H     &kp J     &kp K     &kp L    CTL_CLN
+//├─────────┼─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┼─────────┤
+     Z_SHFT    &kp X     &kp C     &kp V     &kp B          &kp N     &kp M   &kp COMMA  ALT_DOT   FS_SHFT 
+//└─────────┴─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┴─────────┘
+                       &kp LGUI  NUM_TAB   &kp RET        SYM_SPC   NAV_BSP   DEL_FN
+//                    └─────────┴─────────┴─────────┘    └─────────┴─────────┴─────────┘
+            >;
+        };
+
+   
+//         game_layer {
+//             bindings = <
+
+// //┌─────────┬─────────┬─────────┬─────────┬─────────┐    ┌─────────┬─────────┬─────────┬─────────┬─────────┐
+//      &kp Q     &kp W     &kp E     &kp R     &kp T          &kp Y     &kp U     &kp I     &kp O     &kp P    
+// //├─────────┼─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┼─────────┤
+//      &kp A     &kp S     &kp D     &kp F     &kp G          &kp H     &kp J     &kp K     &kp L    CTL_CLN
+// //├─────────┼─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┼─────────┤
+//      Z_SHFT    &kp X     &kp C     &kp V     &kp B          &kp N     &kp M   &kp COMMA  ALT_DOT   FS_SHFT 
+// //└─────────┴─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┴─────────┘
+//                         &kp ESC  &kp TAB   &kp SPACE       SYM_RET   NAV_BSP   DEL_FN
+// //                    └─────────┴─────────┴─────────┘    └─────────┴─────────┴─────────┘
+//             >;
+
+//         };     
+
+         sym_layer {
+            bindings = <
+//┌─────────┬─────────┬─────────┬─────────┬─────────┐    ┌─────────┬─────────┬─────────┬─────────┬─────────┐
+   &kp GRAVE &kp PIPE  &none     &kp SQT   &kp DQT        &kp LBRC  &kp RBRC  &kp LBKT  &kp RBKT  &kp BSLH  
+//├─────────┼─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┼─────────┤
+   &kp N1    &kp N2    &kp N3    &kp N4    &kp N5         &kp N6    &kp N7    &kp N8    &kp N9    &kp N0    
+//├─────────┼─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┼─────────┤
+   &kp LSHFT &none     &none     &none     &none          &kp PLUS  &kp UNDER &kp MINUS &kp EQUAL &kp RSHFT
+//└─────────┴─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┴─────────┘
+                       &none     &none     &none          &trans    &none     &none
+//                    └─────────┴─────────┴─────────┘    └─────────┴─────────┴─────────┘
+            >;
+        };
+
+         num_layer {
+            bindings = <
+//┌─────────┬─────────┬─────────┬─────────┬─────────┐    ┌─────────┬─────────┬─────────┬─────────┬─────────┐
+   &kp VOLP  &kp PREV  &kp PLYP  &kp NEXT  &kp NMLCK      WS_PRV    WS_W_PRV  &none     &none     &none      
+//├─────────┼─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┼─────────┤
+   &kp VOLM  &kp MUTE  &kp STOP  &none     &none          WS_NXT    WS_W_NXT  &none     &none     &none  
+//├─────────┼─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┼─────────┤
+   &kp LSHFT &none     &none     &none     &none          &none     &none     &none     &none     &none
+//└─────────┴─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┴─────────┘
+                       &none     &trans    &none          &none     &none     &none
+//                    └─────────┴─────────┴─────────┘    └─────────┴─────────┴─────────┘
+            >;
+        };
+
+
+        nav_layer {
+            bindings = <
+//┌─────────┬─────────┬─────────┬─────────┬─────────┐    ┌─────────┬─────────┬─────────┬─────────┬─────────┐
+   &kp ESC   &none     &kp UP    &none     &none          &none     CB_PRV    CB_NXT    &none     &none    
+//├─────────┼─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┼─────────┤
+   &none     &kp LEFT  &kp DOWN  &kp RIGHT &none          &kp INS   &kp HOME  &kp PG_UP &none     &none 
+//├─────────┼─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┼─────────┤
+   &none     &none     &none     &none     &none          &kp DEL   &kp END   &kp PG_DN &none     &none 
+//└─────────┴─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┴─────────┘
+                       &none     &none     &none          &none     &trans    &none
+//                    └─────────┴─────────┴─────────┘    └─────────┴─────────┴─────────┘
+            >;
+        };
+
+        fn_layer {
+            bindings = <
+//┌─────────┬─────────┬─────────┬─────────┬─────────┐    ┌─────────┬─────────┬─────────┬─────────┬─────────┐
+   &kp F12   &none     &none     &none     &none          &none     &kp PSCRN &kp SLCK  &kp PSBK  &kp F11  
+//├─────────┼─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┼─────────┤
+   &kp F1    &kp F2    &kp F3    &kp F4    &kp F5         &kp F6    &kp F7    &kp F8    &kp F9    &kp F10  
+//├─────────┼─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┼─────────┤
+   &kp CAPS  &bt BT_CA &bt BT_C  O_BLE     O_USB          &bt BT_0  &bt BT_1  &bt BT_2  &bt BT_3  &none
+//└─────────┴─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┴─────────┘
+                       &trans    &trans    &trans         &none     &none     &trans
+//                    └─────────┴─────────┴─────────┘    └─────────┴─────────┴─────────┘
+            >;
+        };
+
+    };
+};
