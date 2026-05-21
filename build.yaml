@@ -21,3 +21,5 @@
 include:
   - board: nice_nano_v2
     shield: ahokore
+  - board: nice_nano_v2
+    shield: settings_reset
