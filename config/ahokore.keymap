@@ -9,7 +9,7 @@
 
 #define DFLT 0
 #define SYM 1
-#define NUM 2
+#define NIRI 2
 #define NAV 3
 #define FN 4
 #define L_BT 5
@@ -49,7 +49,7 @@
 #define SYM_SPC &lt_qt SYM SPACE
 #define SYM_RET &lt_qt SYM RET
 #define NAV_BSP &lt_qt NAV BSPC
-#define NUM_TAB &lt NUM TAB
+#define NIRI_TAB &lt NIRI TAB
 #define DEL_FN &lt_qt FN DEL
 #define WSPC_RET &lt_qt WSPC RET 
 #define O_USB &out OUT_USB
@@ -120,7 +120,7 @@
 //├─────────┼─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┼─────────┤
      Z_SHFT    &kp X     &kp C     &kp V     &kp B          &kp N     &kp M   &kp COMMA  ALT_DOT   FS_SHFT 
 //└─────────┴─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┴─────────┘
-                       &kp LGUI  NUM_TAB   &kp RET        SYM_SPC   NAV_BSP   DEL_FN
+                       &kp LGUI  NIRI_TAB  &kp RET        SYM_SPC   NAV_BSP   DEL_FN
 //                    └─────────┴─────────┴─────────┘    └─────────┴─────────┴─────────┘
             >;
         };
@@ -139,14 +139,14 @@
             >;
         };
 
-         num_layer {
+         niri_layer {
             bindings = <
 //┌─────────┬─────────┬─────────┬─────────┬─────────┐    ┌─────────┬─────────┬─────────┬─────────┬─────────┐
-   &kp VOLP  &kp PREV  &kp PLYP  &kp NEXT  &kp NMLCK      WS_W_PRV  WS_PRV    ROW_DEC   &none     &none      
+   &kp MUTE  &kp PREV  &kp PLYP  &kp NEXT  &kp VOLP       WIN_LFT   WS_PRV    WS_NXT    WIN_RGT   &none
 //├─────────┼─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┼─────────┤
-   &kp VOLM  &kp MUTE  &kp STOP  &none     &none          WIN_LFT   WIN_RGT   COL_DEC   COL_INC   &none  
+   &kp LCTL  &none     &kp STOP  &none     &kp VOLM       &kp LG(H) &kp LG(J) &kp LG(K) &kp LG(L) &none  
 //├─────────┼─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┼─────────┤
-   &kp LSHFT &none     &none     &none     &none          WS_W_NXT  WS_NXT    ROW_INC   &none     &none
+   &kp LSHFT &none     &none     &none     &none          COL_DEC   ROW_DEC   ROW_INC   COL_INC   &none
 //└─────────┴─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┴─────────┘
                        &none     &trans    &none          &none     &none     &none
 //                    └─────────┴─────────┴─────────┘    └─────────┴─────────┴─────────┘
@@ -157,7 +157,7 @@
         nav_layer {
             bindings = <
 //┌─────────┬─────────┬─────────┬─────────┬─────────┐    ┌─────────┬─────────┬─────────┬─────────┬─────────┐
-   &kp ESC   &none     &kp UP    &none     &none          &none     CB_PRV    CB_NXT    &none     &none    
+   &kp ESC   &none     &kp UP    &none     &none          &none     CB_PRV    CB_NXT    &none     &kp NMLCK    
 //├─────────┼─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┼─────────┤
    &none     &kp LEFT  &kp DOWN  &kp RIGHT &none          &kp INS   &kp HOME  &kp PG_UP &none     &none 
 //├─────────┼─────────┼─────────┼─────────┼─────────┤    ├─────────┼─────────┼─────────┼─────────┼─────────┤
